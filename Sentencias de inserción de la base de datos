@@ -1,0 +1,28 @@
+insert into CLIENTES (Cedula,Nombres,Apellidos,Genero,Direccion,Telefono,fecha_Registro,Antiguedad,numero_Mascotas)values ('1315445674','Maria','Zambrano','femenino','Calle 13 - AV 12','0912345678','31/12/2008','null', 2);
+insert into CLIENTES (Cedula,Nombres,Apellidos,Genero,Direccion,Telefono,fecha_Registro,Antiguedad,numero_Mascotas)values ('1307334779','Juan','Perez','Masculino','Calle 08 - AV 11','0912345678','31/12/2012','null', 1);
+
+insert into Visitas (id_Cliente,fecha)values (2,'17/01/2010');
+insert into Visitas (id_Cliente,fecha)values (1,'15/01/2010');
+insert into Visitas (id_Cliente,fecha)values (1,'16/01/2010');
+insert into Visitas (id_Cliente,fecha)values (1,'17/01/2010');
+
+insert into MASCOTA (id_Cliente,Nombre,fecha_Nacimiento,genero,color,Esterelizada) values (1,'oso','17/01/2007','macho','cafe',false);
+insert into MASCOTA (id_Cliente,Nombre,fecha_Nacimiento,genero,color,Esterelizada) values (1,'firulais','17/01/2007','macho','blanco',true);
+insert into MASCOTA (id_Cliente,Nombre,fecha_Nacimiento,genero,color,Esterelizada) values (2,'Laica','17/01/2007','hembra','negro',true);
+
+insert into VACUNA(Nombre) values('Invermectina');
+insert into VACUNA(Nombre) values('Parvovirus');
+insert into VACUNA(Nombre) values('Oxitetraciclina');
+
+insert into VETERINARIO (Nombre,Apellido) values ('Jose','Galindez');
+insert into VETERINARIO (Nombre,Apellido) values ('Gabriela','Gonzalez');
+
+insert into DETALLE_VACUNA (id_Vacuna,id_Veterinario,id_Mascota,fecha,dosis) values (1,1,1,'18/01/2019','30 ml');
+insert into DETALLE_VACUNA (id_Vacuna,id_Veterinario,id_Mascota,fecha,dosis) values (2,1,3,'18/01/2019','50 ml');
+insert into DETALLE_VACUNA (id_Vacuna,id_Veterinario,id_Mascota,fecha,dosis) values (3,2,2,'18/01/2019','40 ml');
+
+insert into PROVEEDOR (Nombre,Telefono) values ('Guillermo Lasso','0901234567');
+insert into PROVEEDOR (Nombre,Telefono) values ('Paul Pogba','0900000000');
+
+insert into INSUMOS (id_Proveedor,Nombre) values (1,'Oxitetraciclina');
+insert into INSUMOS (id_Proveedor,Nombre) values (2,'Invermectina');
