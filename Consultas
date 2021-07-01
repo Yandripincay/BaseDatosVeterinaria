@@ -3,30 +3,33 @@
 SELECT 
 CLIENTES.Nombres,
 CLIENTES.Apellidos,
-count(Visitas.id_Cliente) as Cantidad_Visitas
+count(VISITAS_CLIENTES.id_Cliente) as Cantidad_de_Visitas
 FROM CLIENTES
-INNER JOIN Visitas
-ON  Visitas.id_Cliente = CLIENTES.id_Cliente
+INNER JOIN VISITAS_CLIENTES
+ON  VISITAS_CLIENTES.id_Cliente = CLIENTES.id_Cliente
 GROUP BY CLIENTES.Nombres,
 CLIENTES.Apellidos;
 
 -- Cantidad de vacunas que una mascota a tenido
 SELECT 
 MASCOTA.Nombre,
-count(DETALLE_VACUNA.id_Vacuna) as Cantidad_de_vacunas
+count(DETALLE_VACUNA.Mascota) as Cantidad_de_vacunas
 FROM MASCOTA
 INNER JOIN DETALLE_VACUNA
-ON  DETALLE_VACUNA.id_Mascota = MASCOTA.id_Mascota
+ON  DETALLE_VACUNA.Mascota = MASCOTA.id_Mascota
 GROUP BY MASCOTA.Nombre;
 
 -- Cantidad de vacuna que cada veterinario a puesto
 SELECT 
-VETERINARIO.Nombre,
-VETERINARIO.Apellido,
-count(DETALLE_VACUNA.id_Vacuna) as Cantidad_de_vacunas_puestas
-FROM VETERINARIO
+VETERINARIOS.Nombre,
+VETERINARIOS.Apellido,
+count(DETALLE_VACUNA.Veterinario) as Cantidad_de_vacunas_puestas
+FROM VETERINARIOS
 INNER JOIN DETALLE_VACUNA
-ON  DETALLE_VACUNA.id_Veterinario = VETERINARIO.id_Veterinario
+ON  DETALLE_VACUNA.Veterinario = VETERINARIOS.id_Veterinario
 GROUP BY 
-VETERINARIO.Nombre,
-VETERINARIO.Apellido;
+VETERINARIOS.Nombre,
+VETERINARIOS.Apellido;
+
+
+

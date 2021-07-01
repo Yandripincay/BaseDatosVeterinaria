@@ -1,5 +1,14 @@
+create table VETERINARIA(
+	id_Veterinaria serial primary key,
+	Nombre Varchar(50) not null,
+	Logo Varchar(25) not null,
+	Eslogan Varchar(25) not null,
+	Descripcion Varchar(500) not null
+);
+
 create table CLIENTES(
 	id_Cliente serial primary key,
+	id_Veterinaria integer not null,
 	Cedula Varchar(10) not null,
 	Nombres Varchar(25) not null,
 	Apellidos Varchar(25) not null,
@@ -8,13 +17,7 @@ create table CLIENTES(
 	Telefono Varchar(10) not null,
 	fecha_Registro date,
 	Antiguedad varchar(20),
-	numero_Mascotas int
-);
-
-create table Visitas(
-	id_Cliente integer not null,
-	fecha date not null,
-	FOREIGN KEY(id_Cliente) REFERENCES CLIENTES(id_Cliente)
+	FOREIGN KEY(id_Veterinaria) REFERENCES VETERINARIA(id_Veterinaria)
 );
 
 create table MASCOTA(
@@ -28,37 +31,69 @@ create table MASCOTA(
 	FOREIGN KEY(id_Cliente) REFERENCES CLIENTES(id_Cliente)
 );
 
-create table VACUNA(
-	id_Vacuna serial primary key,
-	Nombre varchar(30)
+create table VETERINARIOS(
+	id_Veterinario serial primary key,
+	id_Veterinaria integer not null,
+	Nombre varchar(20) not null,
+	Apellido varchar(20) not null,
+	Cedula varchar(20) not null,
+	Telefono varchar(20) not null,
+	Genero varchar(20) not null,
+	FOREIGN KEY(id_Veterinaria) REFERENCES VETERINARIA(id_Veterinaria)
 );
 
-create table VETERINARIO(
-	id_Veterinario serial primary key,
+
+create table PROVEEDORES(
+	id_Proveedor serial primary key,
+	id_Veterinaria integer not null,
 	Nombre varchar(20) not null,
-	Apellido varchar(20) not null
+	Apellido varchar(20) not null,
+	Cedula varchar(10) not null,
+	Telefono varchar(20) not null,
+	Genero varchar(20) not null,
+	FOREIGN KEY(id_Veterinaria) REFERENCES VETERINARIA(id_Veterinaria)
+);
+
+
+create table INSUMOS(
+	id_INSUMO serial primary key,
+	Proveedor integer not null,
+	Nombre varchar(30),
+	Cont_neto varchar(30),
+	Fabricante varchar(30),
+	PVP varchar(30),
+	FOREIGN KEY(Proveedor) REFERENCES PROVEEDOR(id_Proveedor)
+);
+
+
+create table VENTAS(
+	id_Venta serial primary key,
+	Insumo integer not null,
+	Cliente integer not null,
+	TipoVenta varchar(20),
+	Cantidad integer,
+	PrecioTotal real,
+	Fecha date,
+	FOREIGN KEY(Insumo) REFERENCES INSUMOS(id_INSUMO),
+	FOREIGN KEY(Cliente) REFERENCES CLIENTES(id_Cliente)
 );
 
 create table DETALLE_VACUNA(
-	id_Vacuna integer not null,
-	id_Veterinario integer not null,
-	id_Mascota integer not null,
+	id_Medicacion serial primary key,
+	Insumo integer not null,
+	Veterinario integer not null,
+	Mascota integer not null,
 	fecha date,
 	dosis varchar(20) not null,
-	FOREIGN KEY(id_Vacuna) REFERENCES VACUNA(id_Vacuna),
-	FOREIGN KEY(id_Veterinario) REFERENCES VETERINARIO(id_Veterinario),
-	FOREIGN KEY(id_Mascota) REFERENCES MASCOTA(id_Mascota)
+	FOREIGN KEY(Insumo) REFERENCES INSUMOS(id_INSUMO),
+	FOREIGN KEY(Veterinario) REFERENCES VETERINARIO(id_Veterinario),
+	FOREIGN KEY(Mascota) REFERENCES MASCOTA(id_Mascota)
 );
 
-create table PROVEEDOR(
-	id_Proveedor serial primary key,
-	Nombre varchar(30) not null,
-	Telefono varchar(10) not null
+create table VISITAS_CLIENTES(
+	id_Visita serial primary key,
+	id_Cliente integer not null,
+	fechaVisita date not null,
+	FOREIGN KEY(id_Cliente) REFERENCES CLIENTES(id_Cliente)
 );
 
-create table INSUMOS(
-	id_Producto serial primary key,
-	id_Proveedor integer not null,
-	Nombre varchar(20),
-	FOREIGN KEY(id_Proveedor) REFERENCES PROVEEDOR(id_Proveedor)
-);
