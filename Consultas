@@ -31,5 +31,15 @@ GROUP BY
 VETERINARIOS.Nombre,
 VETERINARIOS.Apellido;
 
+--Cantidad de mascotas que tiene cada cliente
+SELECT 
+CLIENTES.Nombres,
+CLIENTES.Apellidos,
+count(MASCOTA.id_Mascota) as Cantidad_De_Mascotas
+FROM CLIENTES
+INNER JOIN MASCOTA
+ON  MASCOTA.id_Mascota = CLIENTES.id_Cliente
+GROUP BY CLIENTES.Nombres,
+CLIENTES.Apellidos;
 
 
